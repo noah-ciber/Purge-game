@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>PURGE GAME | Prime Purge Tech®</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        
+        <!-- ÉCRAN 1 : ACCUEIL / INSCRIPTION -->
+        <div id="screen-register" class="screen active">
+            <div class="logo-container">
+                <h1 class="main-title">PURGE</h1>
+                <h2 class="sub-title">GAME</h2>
+                <div class="logo-divider"></div>
+                <p class="tagline">La confiance est un luxe. La survie, une nécessité.</p>
+            </div>
+            
+            <div class="register-form">
+                <div class="input-group">
+                    <label>📱 NUMÉRO DE TÉLÉPHONE</label>
+                    <input type="tel" id="phone-input" placeholder="+33 6 12 34 56 78" value="">
+                    <button id="verify-phone-btn" class="verify-btn">VÉRIFIER LE NUMÉRO</button>
+                    <span id="phone-status" class="status-text"></span>
+                </div>
+                
+                <div class="input-group">
+                    <label>👤 PSEUDO</label>
+                    <input type="text" id="pseudo-input" placeholder="Votre identité..." maxlength="20">
+                </div>
+                
+                <div class="input-group">
+                    <label>📸 PHOTO DE PROFIL</label>
+                    <div class="avatar-upload">
+                        <img id="avatar-preview" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%231a1a2e'/%3E%3Ctext x='50' y='70' font-size='50' text-anchor='middle' fill='%23e94560' font-family='Arial'%3E👤%3C/text%3E%3C/svg%3E" alt="Avatar">
+                        <input type="file" id="avatar-input" accept="image/*">
+                        <label for="avatar-input" class="upload-label">CHOISIR UNE PHOTO</label>
+                    </div>
+                </div>
+                
+                <button id="register-btn" class="action-btn" disabled>S'INSCRIRE</button>
+            </div>
+            
+            <div class="legal-footer">
+                <p>En vous inscrivant, vous acceptez les termes du game.</p>
+                <p class="copyright">© Prime Purge Tech® — Tous droits réservés</p>
+            </div>
+        </div>
+
+        <!-- ÉCRAN 2 : LOBBY / CRÉATION D'ÉQUIPE -->
+        <div id="screen-lobby" class="screen">
+            <div class="header">
+                <h2>SALLE D'ATTENTE</h2>
+                <div id="user-info-display"></div>
+            </div>
+            
+            <div class="team-section">
+                <h3>VOTRE ÉQUIPE <span id="team-count">0/4</span></h3>
+                <div class="code-display">
+                    <span>CODE D'INVITATION :</span>
+                    <strong id="invite-code">----</strong>
+                    <button id="copy-code-btn">📋 COPIER</button>
+                </div>
+                
+                <div class="players-grid" id="players-grid">
+                    <!-- Les 4 slots seront injectés ici -->
+                </div>
+                
+                <div class="join-section">
+                    <input type="text" id="join-code-input" placeholder="Entrez un code d'invitation" maxlength="6">
+                    <button id="join-team-btn">REJOINDRE</button>
+                </div>
+            </div>
+            
+            <button id="start-game-btn" class="action-btn" disabled>DÉMARRER LE GAME</button>
+            <button id="logout-btn" class="secondary-btn">DÉCONNEXION</button>
+            
+            <p class="copyright">© Prime Purge Tech®</p>
+        </div>
+
+        <!-- ÉCRAN 3 : JEU -->
+        <div id="screen-game" class="screen">
+            <div class="game-header">
+                <div class="round-info">MANCHE <span id="current-round">1</span>/5</div>
+                <div class="timer-container">
+                    <div id="timer-bar"></div>
+                    <span id="timer-text">01:00</span>
+                </div>
+                <div class="score-container">
+                    SCORE : <span id="game-score">0</span> pts
+                </div>
+            </div>
+            
+            <div class="question-container">
+                <p id="question-text">Chargement de la question...</p>
+            </div>
+            
+            <div class="game-players-grid" id="game-players-grid">
+                <!-- Les 4 joueurs avec leur input -->
+            </div>
+            
+            <div class="game-info">
+                <p id="game-message"></p>
+            </div>
+            
+            <p class="copyright in-game">© Prime Purge Tech®</p>
+        </div>
+
+        <!-- ÉCRAN 4 : RÉSULTAT -->
+        <div id="screen-result" class="screen">
+            <div class="result-container">
+                <h2 id="result-title">RÉSULTAT DU GAME</h2>
+                <div id="result-icon" class="result-icon"></div>
+                <p id="result-message"></p>
+                <div id="final-score-display"></div>
+                
+                <div id="contact-section" class="contact-section hidden">
+                    <h3>CONTACT DU MAÎTRE DE JEU</h3>
+                    <div class="contact-card">
+                        <p>📱 <strong>WhatsApp / Télégram</strong></p>
+                        <p id="contact-info">+24160248210</p>
+                        <button id="copy-contact-btn">COPIER LE CONTACT</button>
+                    </div>
+                </div>
+                
+                <div id="ban-section" class="ban-section hidden">
+                    <h3>⛔ GAME EXÉCUTÉE</h3>
+                    <p>Votre compte est suspendu pour :</p>
+                    <div class="ban-timer" id="ban-timer">7 JOURS</div>
+                    <p>La confiance ne se donne pas, elle se mérite.</p>
+                </div>
+                
+                <button id="back-to-home-btn" class="action-btn">RETOUR À L'ACCUEIL</button>
+            </div>
+            
+            <p class="copyright">© Prime Purge Tech®</p>
+        </div>
+
+        <!-- BANNIÈRE SI BANNI -->
+        <div id="ban-overlay" class="ban-overlay hidden">
+            <div class="ban-message">
+                <h2>⛔ ACCÈS REFUSÉ</h2>
+                <p>Vous avez été baiser.</p>
+                <p>Temps restant : <span id="ban-time-remaining"></span></p>
+                <p class="copyright">© Prime Purge Tech®</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="questions.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
